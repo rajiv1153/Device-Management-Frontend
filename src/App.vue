@@ -1,28 +1,28 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <Drawer v-if="checkDisplay()" />
+    <NavBar />
+    <ViewComponent />
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Drawer from "@/components/Drawer.vue";
+import NavBar from "@/components/Navbar.vue";
+import ViewComponent from "./View.vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { Drawer, NavBar, ViewComponent },
+  data: () => ({
+    //
+  }),
+  methods: {
+    checkDisplay() {
+      if (this.$route.path == "/" || this.$route.path == "/register") {
+        return false;
+      }
+      return true;
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
