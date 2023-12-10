@@ -3,7 +3,7 @@
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="12"> <DeviceComponent /> </v-col>
-        <v-col cols="12"> <ReportComponent /> </v-col>
+        <v-col v-if="this.$store.state.deviceReport" cols="12"> <ReportComponent /> </v-col>
       </v-row>
     </v-container>
   </v-main>
@@ -44,5 +44,6 @@ export default {
         });
     },
   },
+  
 };
 </script>
