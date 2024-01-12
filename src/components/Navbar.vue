@@ -60,7 +60,8 @@ export default {
           headers: { Authorization: "Bearer " + this.$store.state.token },
         })
         .then((r) => {
-          this.$store.commit("SET_TOKEN", "");          
+          this.$store.commit("SET_TOKEN", "");     
+          this.$store.dispatch("triggerSnackbar", { message: r.data.message });     
           this.$router.push("/");
           return r;
         })

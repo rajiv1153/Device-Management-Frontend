@@ -9,7 +9,7 @@
         <v-card-text>
           <v-card-text>
             <template>
-              <v-form ref="reportRef" @submit.prevent="addorUpdateDevice">
+              <v-form ref="deviceForm" @submit.prevent="addorUpdateDevice">
                 <p
                   v-if="Object.keys(validationErrors).length != 0"
                   class="text-center"
@@ -115,6 +115,7 @@ export default {
   methods: {
     openDialog() {
       this.deviceFormVisible = true;
+      this.$refs.deviceForm.resetValidation()
     },
     closeDialog() {
       this.deviceFormVisible = false;

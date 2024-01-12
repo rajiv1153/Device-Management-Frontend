@@ -21,8 +21,9 @@
             <v-text-field
               v-model="email"
               label="Email"
-              :rules="emailRules"
+
             ></v-text-field>
+            <span v-if="!checkEmail()">Email is required and should be valid email</span>
             <v-text-field
               v-model="password"
               type="password"
@@ -64,6 +65,11 @@ export default {
     }
   },
   methods: {
+    checkEmail(){
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     return emailRegex.test(this.email)
+
+    },
     login() {
       const credentials = {
         email: this.email,

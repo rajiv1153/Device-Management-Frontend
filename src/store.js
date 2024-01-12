@@ -7,7 +7,7 @@ import createPersistedState from "vuex-persistedstate";
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      storage: window.sessionStorage,
+      storage: window.localStorage,
     }),
   ],
   state: {
@@ -108,5 +108,8 @@ export default new Vuex.Store({
         console.error("Error fetching data from API:", error);
       }
     },
+    async resetReport({ commit },) {
+      commit("setdeviceReport", '');
+    }
   },
 });

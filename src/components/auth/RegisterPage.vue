@@ -26,10 +26,10 @@
             ></v-text-field>
             <v-text-field
               v-model="email"
-              :rules="emailRules"
               label="Email"
               required
             ></v-text-field>
+            <span v-if="!checkEmail()">Email is required and should be valid email</span>
             <v-text-field
               v-model="password"
               :rules="passwordRules"
@@ -73,7 +73,7 @@ export default {
       password: "",
       repassword: "",
       validationErrors: {},
-      emailRules: [(v) => !!v || "Email is required"],
+      emailRules: [(v) => !!v || "Email is required",],
       passwordRules: [(v) => !!v || "Password is required"],
       repasswordRules: [(v) => !!v || "Confirm Password is required"],
       nameRules: [(v) => !!v || "Name is required"],
@@ -93,6 +93,10 @@ export default {
     },
   },
   methods: {
+    checkEmail(){
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     return emailRegex.test(this.email)
+    },        
     register() {
       const credentials = {
         name: this.name,

@@ -4,7 +4,7 @@
     <v-card class="blue lighten-4">
       <v-card-title class="green lighten-3">
         <v-row>
-          <v-col><v-icon>mdi-monitor-cellphone-star</v-icon>Devices</v-col>
+          <v-col><v-icon>mdi-monitor-cellphone</v-icon>Devices</v-col>
           <v-col class="text-right">
             <v-btn color="green" @click="openDeviceForm()">
               <v-icon>mdi-plus</v-icon> Add Device
@@ -24,11 +24,7 @@
         @click:row="initReport"
       >
         <template v-slot:top>
-          <v-text-field
-            label="Search"
-            v-model="search"
-            class="mx-4"
-          ></v-text-field>
+          <v-text-field label="Search" v-model="search" class="mx-4"></v-text-field>
         </template>
         <template v-slot:[`item.enabled`]="{ item }">
           <v-icon v-if="item.enabled">mdi-checkbox-marked-circle</v-icon
@@ -96,7 +92,8 @@ export default {
       this.$store.dispatch("fetchDataReport", value.id);
     },
     deleteDevice(id) {
-      confirm("Do you Confirm?")
+      confirm("Do you Confirm?");
+
       this.$http
         .delete("/devices/" + id, {
           headers: { Authorization: "Bearer " + this.$store.state.token },
@@ -105,7 +102,9 @@ export default {
           this.$store.dispatch("triggerSnackbar", {
             message: "Device Deleted Successfully!",
           });
+
           this.$store.dispatch("fetchDataFromDevicesApi");
+          this.$store.dispatch("resetReport");
           return r;
         })
         .catch((error) => {
